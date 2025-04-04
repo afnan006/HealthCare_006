@@ -6,3 +6,8 @@ class PatientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = '__all__'
         read_only_fields = ['created_by']
+
+    def validate_age(self, value):
+        if value < 0:
+            raise serializers.ValidationError("Age cannot be negative.")
+        return value

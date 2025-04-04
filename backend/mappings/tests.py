@@ -23,3 +23,23 @@ class MappingTests(TestCase):
         response = self.client.post(self.mapping_url, data, format='json')
         self.assertEqual(response.status_code, 201)
         self.assertEqual(PatientDoctorMapping.objects.count(), 1)
+
+def test_get_doctors_for_patient(self):
+    """Test retrieving all doctors assigned to Peter Parker"""
+    # Assign Dr. Strange to Peter Parker
+    mapping = PatientDoctorMapping.objects.create(patient=self.patient, doctor=self.doctor)
+    response = self.client.get(f'/api/mappings/patient/{self.patient.id}/')
+    self.assertEqual(response.status_code, 200)
+    self.assertEqual(len(response.data), 1)
+    self.assertEqual(response.data[0]['doctor'], self.doctor.id)
+
+def test_duplicate_mapping(self):
+    """Test assigning the same doctor to the same patient twice"""
+    PatientDoctorMapping.objects.create(patient=self.patient, doctor=self.doctor)
+    data = {
+        'patient': self.patient.id,
+        'doctor': self.doctor.id
+    }
+    response = self.client.post(self.mapping_url, data, format='json')
+    self.assertEqual(response.status_code, 400)
+    self.assertIn('This mapping already exists.', response.data['non_field_errors'])

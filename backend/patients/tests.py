@@ -29,3 +29,15 @@ class PatientTests(TestCase):
         response = self.client.get(self.patient_url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 1)
+
+    def test_create_patient_with_invalid_age(self):
+        """Test creating a patient with invalid age"""
+        data = {
+            'name': 'Peter Parker',
+            'age': -5,
+            'gender': 'Male',
+            'address': 'Queens, New York'
+        }
+        response = self.client.post(self.patient_url, data, format='json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('Age cannot be negative.', response.data['age'])
