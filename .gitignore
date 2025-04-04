@@ -1,0 +1,55 @@
+# Ignore environment variables and secrets
+.env
+E:\Heathcare\venv
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Ignore Django migrations (optional)
+**/migrations/*
+
+# Ignore database files (if any)
+*.db
+*.sqlite3
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore virtual environment (venv)
+venv/
+env/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+
+# Ignore environment variables and secrets
+.env
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Django migrations
+**/migrations/
+
+# DB files & logs
+*.db
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS crap
+.DS_Store
+Thumbs.db
